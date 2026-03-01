@@ -1,275 +1,279 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Littératie Numérique - 9e Année</title>
+    <title>Digital Stewardship | Gestion Numérique</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
         
-        /* Smooth transitions for mobile menu */
-        #mobile-menu {
-            transition: max-height 0.3s ease-in-out;
-            max-height: 0;
-            overflow: hidden;
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
         }
-        #mobile-menu.open {
-            max-height: 500px;
+
+        .card-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        }
+
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen">
+<body class="bg-slate-50 text-slate-900">
 
-    <!-- Navigation Header -->
-    <nav class="sticky top-0 z-50 glass border-b border-slate-200 py-3 px-4 md:px-6">
-        <div class="max-w-5xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                    <span class="text-white font-bold">9</span>
-                </div>
-                <h1 class="text-lg md:text-xl font-bold text-indigo-700 leading-tight">Gestion Numérique</h1>
-            </div>
-
-            <!-- Desktop Buttons -->
-            <div class="hidden lg:flex items-center gap-2" id="desktop-buttons">
-                <button onclick="showTab('home')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium bg-indigo-600 text-white transition">Sommaire</button>
-                <button onclick="showTab('lesson1')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200 transition">L1: Algorithme</button>
-                <button onclick="showTab('lesson2')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200 transition">L2: Jeux</button>
-                <button onclick="showTab('lesson3')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200 transition">L3: Image</button>
-                <button onclick="showTab('lesson4')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200 transition">L4: Achats</button>
-            </div>
-
-            <!-- Mobile Menu Toggle -->
-            <button onclick="toggleMenu()" class="lg:hidden p-2 rounded-lg hover:bg-slate-100 text-slate-600" aria-label="Menu">
-                <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-        </div>
-
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="lg:hidden bg-white border-t border-slate-100 mt-3 rounded-b-xl shadow-lg">
-            <div class="flex flex-col p-2 space-y-1">
-                <button onclick="showTab('home')" class="tab-btn-mobile w-full text-left px-4 py-3 rounded-lg text-sm font-medium bg-indigo-50 text-indigo-700">Sommaire</button>
-                <button onclick="showTab('lesson1')" class="tab-btn-mobile w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50">Leçon 1: Algorithme</button>
-                <button onclick="showTab('lesson2')" class="tab-btn-mobile w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50">Leçon 2: Jeux & Paris</button>
-                <button onclick="showTab('lesson3')" class="tab-btn-mobile w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50">Leçon 3: Image & Corps</button>
-                <button onclick="showTab('lesson4')" class="tab-btn-mobile w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50">Leçon 4: Achats en ligne</button>
+    <!-- Navigation -->
+    <nav class="sticky-nav border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="font-bold text-xl text-indigo-700 tracking-tight">Digital Stewardship</div>
+            <div class="flex gap-2">
+                <button onclick="setLanguage('en')" id="btn-en" class="px-3 py-1 rounded-full text-sm font-medium bg-indigo-600 text-white transition">EN</button>
+                <button onclick="setLanguage('fr')" id="btn-fr" class="px-3 py-1 rounded-full text-sm font-medium bg-slate-200 text-slate-700 hover:bg-slate-300 transition">FR</button>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto px-4 md:px-6 pb-20 mt-4 md:mt-8">
+    <!-- Hero Section -->
+    <header class="bg-indigo-900 text-white py-12 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4 lang-en">Renewing the Mind in a Wired World</h1>
+            <h1 class="text-3xl md:text-5xl font-bold mb-4 lang-fr">Renouveler l'esprit dans un monde connecté</h1>
+            <p class="text-indigo-200 text-lg md:text-xl lang-en">Navigating Grade 9 with wisdom, focus, and stewardship.</p>
+            <p class="text-indigo-200 text-lg md:text-xl lang-fr">Naviguer en 9e année avec sagesse, concentration et gestion responsable.</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8">
         
-        <!-- HOME / SUMMARY -->
-        <div id="home" class="tab-content active space-y-6 md:space-y-8 animate-in fade-in duration-500">
-            <section class="bg-white p-5 md:p-8 rounded-2xl shadow-sm border border-slate-100">
-                <h2 class="text-2xl md:text-3xl font-bold mb-3">Aperçu du Programme</h2>
-                <p class="text-slate-600 mb-6 italic text-sm md:text-base">Respecte le curriculum de l'Ontario, les AECO, et les restrictions sur les téléphones de 2024-2025.</p>
+        <!-- Section Selector -->
+        <div class="flex flex-wrap gap-2 mb-8 justify-center">
+            <button onclick="showTab('lessons')" class="tab-btn px-6 py-3 rounded-xl font-semibold shadow-sm transition active-tab bg-indigo-100 text-indigo-800" data-tab="lessons">
+                <span class="lang-en">Lesson Plans</span><span class="lang-fr">Plans de leçons</span>
+            </button>
+            <button onclick="showTab('brain')" class="tab-btn px-6 py-3 rounded-xl font-semibold shadow-sm transition bg-white text-slate-600 border border-slate-200" data-tab="brain">
+                <span class="lang-en">The Science</span><span class="lang-fr">La Science</span>
+            </button>
+            <button onclick="showTab('parents')" class="tab-btn px-6 py-3 rounded-xl font-semibold shadow-sm transition bg-white text-slate-600 border border-slate-200" data-tab="parents">
+                <span class="lang-en">For Parents</span><span class="lang-fr">Pour les Parents</span>
+            </button>
+        </div>
+
+        <!-- Lessons Tab -->
+        <section id="lessons" class="tab-content active">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Lesson 1 -->
+                <div class="card-gradient p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="text-xs font-bold text-indigo-600 uppercase mb-2">Lesson 1 / Leçon 1</div>
+                    <h3 class="text-xl font-bold mb-3 lang-en">The Algorithm of the Heart</h3>
+                    <h3 class="text-xl font-bold mb-3 lang-fr">L'algorithme du cœur</h3>
+                    <p class="text-slate-600 mb-4 lang-en">Understand how "Infinite Scroll" creates the Vegas Effect in your brain.</p>
+                    <p class="text-slate-600 mb-4 lang-fr">Comprendre comment le « défilement infini » crée l'effet Vegas dans votre cerveau.</p>
+                    <div class="bg-indigo-50 p-4 rounded-lg">
+                        <strong class="text-indigo-900 lang-en">Key Strategy: 3-Breath Rule</strong>
+                        <strong class="text-indigo-900 lang-fr">Stratégie : Règle des 3 respirations</strong>
+                        <p class="text-sm text-indigo-800 lang-en mt-1">Pause for 3 breaths before opening an app to check your emotional intent.</p>
+                        <p class="text-sm text-indigo-800 lang-fr mt-1">Prenez 3 respirations avant d'ouvrir une application pour vérifier votre intention émotionnelle.</p>
+                    </div>
+                </div>
+
+                <!-- Lesson 2 -->
+                <div class="card-gradient p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="text-xs font-bold text-emerald-600 uppercase mb-2">Lesson 2 / Leçon 2</div>
+                    <h3 class="text-xl font-bold mb-3 lang-en">Beyond the Skins</h3>
+                    <h3 class="text-xl font-bold mb-3 lang-fr">Au-delà des « Skins »</h3>
+                    <p class="text-slate-600 mb-4 lang-en">Learn how Loot Boxes mimic slot machines using variable rewards.</p>
+                    <p class="text-slate-600 mb-4 lang-fr">Découvrez comment les coffres de butin imitent les machines à sous grâce aux récompenses variables.</p>
+                    <div class="bg-emerald-50 p-4 rounded-lg">
+                        <strong class="text-emerald-900 lang-en">Key Strategy: The 10-Minute Rule</strong>
+                        <strong class="text-emerald-900 lang-fr">Stratégie : La règle des 10 minutes</strong>
+                        <p class="text-sm text-emerald-800 lang-en mt-1">Walk away for 10 minutes to let a dopamine spike fade before spending money.</p>
+                        <p class="text-sm text-emerald-800 lang-fr mt-1">Éloignez-vous 10 minutes pour laisser la pointe de dopamine redescendre avant d'acheter.</p>
+                    </div>
+                </div>
+
+                <!-- Lesson 3 -->
+                <div class="card-gradient p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="text-xs font-bold text-rose-600 uppercase mb-2">Lesson 3 / Leçon 3</div>
+                    <h3 class="text-xl font-bold mb-3 lang-en">The Targeted Temple</h3>
+                    <h3 class="text-xl font-bold mb-3 lang-fr">Le Temple ciblé</h3>
+                    <p class="text-slate-600 mb-4 lang-en">Focusing on Human Dignity and the body as a temple in digital spaces.</p>
+                    <p class="text-slate-600 mb-4 lang-fr">Mise sur la dignité humaine et le corps comme temple dans les espaces numériques.</p>
+                    <div class="bg-rose-50 p-4 rounded-lg">
+                        <strong class="text-rose-900 lang-en">Key Strategy: Dignity Manifesto</strong>
+                        <strong class="text-rose-900 lang-fr">Stratégie : Manifeste de la dignité</strong>
+                        <p class="text-sm text-rose-800 lang-en mt-1">Commit to treating yourself and others with respect online.</p>
+                        <p class="text-sm text-rose-800 lang-fr mt-1">S'engager à se respecter et à respecter les autres en ligne.</p>
+                    </div>
+                </div>
+
+                <!-- Lesson 4 -->
+                <div class="card-gradient p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="text-xs font-bold text-amber-600 uppercase mb-2">Lesson 4 / Leçon 4</div>
+                    <h3 class="text-xl font-bold mb-3 lang-en">The Smart Swipe</h3>
+                    <h3 class="text-xl font-bold mb-3 lang-fr">Le balayage intelligent</h3>
+                    <p class="text-slate-600 mb-4 lang-en">Why "one-click" shopping bypasses the brain's logic center.</p>
+                    <p class="text-slate-600 mb-4 lang-fr">Pourquoi l'achat « en un clic » contourne le centre logique du cerveau.</p>
+                    <div class="bg-amber-50 p-4 rounded-lg">
+                        <strong class="text-amber-900 lang-en">Key Strategy: The 24-Hour Rule</strong>
+                        <strong class="text-amber-900 lang-fr">Stratégie : La règle des 24 heures</strong>
+                        <p class="text-sm text-amber-800 lang-en mt-1">Keep items in your digital cart for a full day before clicking buy.</p>
+                        <p class="text-sm text-amber-800 lang-fr mt-1">Laissez les articles dans votre panier numérique une journée entière avant d'acheter.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brain Tab -->
+        <section id="brain" class="tab-content">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 max-w-3xl mx-auto">
+                <h2 class="text-2xl font-bold mb-6 text-center lang-en">Brain Maturation: The "Golden Window"</h2>
+                <h2 class="text-2xl font-bold mb-6 text-center lang-fr">Maturation cérébrale : Une fenêtre cruciale</h2>
                 
-                <div class="overflow-x-auto -mx-5 md:mx-0">
-                    <div class="inline-block min-w-full align-middle">
-                        <table class="min-w-full text-left border-collapse">
-                            <thead class="bg-slate-100 text-xs md:text-sm">
-                                <tr>
-                                    <th class="p-3 md:p-4 font-semibold whitespace-nowrap">Comportement</th>
-                                    <th class="p-3 md:p-4 font-semibold whitespace-nowrap">Le « Crochet »</th>
-                                    <th class="p-3 md:p-4 font-semibold whitespace-nowrap">Valeur Catholique</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-200 text-sm md:text-base">
-                                <tr>
-                                    <td class="p-3 md:p-4 font-medium">Doomscrolling</td>
-                                    <td class="p-3 md:p-4 text-slate-600">Nouveauté / Ennui</td>
-                                    <td class="p-3 md:p-4 text-indigo-600">Pleine conscience</td>
-                                </tr>
-                                <tr>
-                                    <td class="p-3 md:p-4 font-medium">Jeux / Paris</td>
-                                    <td class="p-3 md:p-4 text-slate-600">Chasser la victoire</td>
-                                    <td class="p-3 md:p-4 text-indigo-600">Patience</td>
-                                </tr>
-                                <tr>
-                                    <td class="p-3 md:p-4 font-medium">Image / Porn</td>
-                                    <td class="p-3 md:p-4 text-slate-600">Objectification</td>
-                                    <td class="p-3 md:p-4 text-indigo-600">Dignité humaine</td>
-                                </tr>
-                                <tr>
-                                    <td class="p-3 md:p-4 font-medium">Achats en ligne</td>
-                                    <td class="p-3 md:p-4 text-slate-600">Statut social</td>
-                                    <td class="p-3 md:p-4 text-indigo-600">Simplicité</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- LESSON 1 -->
-        <div id="lesson1" class="tab-content space-y-4 md:space-y-6">
-            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border-l-8 border-indigo-500">
-                <span class="text-indigo-600 font-bold tracking-widest text-xs uppercase">Leçon 1</span>
-                <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-4">L'algorithme du cœur (Doomscrolling)</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-8">
-                    <div class="bg-slate-50 p-4 rounded-lg">
-                        <p class="text-[10px] md:text-xs text-slate-500 uppercase font-bold">Lien Curriculum</p>
-                        <p class="text-xs md:text-sm">Santé mentale (C1.1, C2.1)</p>
-                    </div>
-                    <div class="bg-slate-50 p-4 rounded-lg">
-                        <p class="text-[10px] md:text-xs text-slate-500 uppercase font-bold">AECO</p>
-                        <p class="text-xs md:text-sm">Penseur réfléchi et créatif</p>
-                    </div>
-                </div>
-
-                <div class="space-y-6">
-                    <div>
-                        <h3 class="font-bold text-lg text-indigo-700">Amorce (Minds On)</h3>
-                        <p class="text-slate-700 text-sm md:text-base">Le défi du « défilement infini ». Estimez le nombre de vidéos vues en 10 min. Discutez de « l'effet Vegas ».</p>
-                    </div>
-                    <div class="bg-indigo-50 p-5 md:p-6 rounded-xl border border-indigo-100">
-                        <h3 class="font-bold text-lg text-indigo-700">Action</h3>
-                        <p class="text-slate-700 font-semibold mb-2 italic">Anatomie d'un terrier de lapin (Rabbit Hole)</p>
-                        <p class="text-slate-600 italic text-sm md:text-base">Activité : Créer une carte algorithmique. Si on clique sur "fitness", quelles sont les 10 prochaines vidéos proposées ?</p>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-lg text-indigo-700">Consolidation</h3>
-                        <p class="text-slate-700 italic text-sm md:text-base">Le sabbat numérique : Concevoir une « zone sans technologie » pour la maison.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- LESSON 2 -->
-        <div id="lesson2" class="tab-content space-y-6">
-            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border-l-8 border-emerald-500">
-                <span class="text-emerald-600 font-bold tracking-widest text-xs uppercase">Leçon 2</span>
-                <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-4">Au-delà des « Skins » (Jeux et Paris)</h2>
-                <div class="space-y-6 text-slate-700 text-sm md:text-base">
-                    <div class="flex flex-wrap gap-4 text-xs font-semibold text-slate-500">
-                        <span>CURRICULUM: C1.2 (Addictions)</span>
-                        <span>AECO: Croyant discernant</span>
-                    </div>
-                    <div class="border-t pt-4">
-                        <p class="mb-4"><strong>Amorce :</strong> Comparer un « Loot Box » et une machine à sous. Similitudes sonores et visuelles.</p>
-                        <div class="bg-emerald-50 p-5 md:p-6 rounded-xl mb-4 border border-emerald-100">
-                            <p class="font-bold text-emerald-800 italic">La science du « peut-être »</p>
-                            <p>Analyse de jeux populaires pour trouver des mécanismes de type casino (renforcement variable).</p>
+                <div class="space-y-8">
+                    <div class="flex flex-col md:flex-row gap-6 items-start">
+                        <div class="bg-indigo-100 text-indigo-700 w-full md:w-48 h-32 rounded-xl flex items-center justify-center font-bold text-center p-4">
+                            <span class="lang-en">Nucleus Accumbens</span><span class="lang-fr">Noyau Accumbens</span>
                         </div>
-                        <p><strong>Consolidation :</strong> Règle des 10 minutes avant tout achat en jeu pour calmer le pic de dopamine.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- LESSON 3 -->
-        <div id="lesson3" class="tab-content space-y-6">
-            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border-l-8 border-rose-500">
-                <span class="text-rose-600 font-bold tracking-widest text-xs uppercase">Leçon 3</span>
-                <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-4">Le temple ciblé (Image et Corps)</h2>
-                <div class="space-y-6 text-slate-700 text-sm md:text-base">
-                    <div class="flex flex-wrap gap-4 text-xs font-semibold text-slate-500">
-                        <span>CURRICULUM: C1.3, C2.4</span>
-                        <span>AECO: Personne soucieuse des autres</span>
-                    </div>
-                    <div class="border-t pt-4">
-                        <p class="mb-4"><strong>Amorce :</strong> La « bulle de comparaison ». Réalité vs flux filtrés et retouchés.</p>
-                        <div class="bg-rose-50 p-5 md:p-6 rounded-xl mb-4 border border-rose-100">
-                            <p class="font-bold text-rose-800 italic">L'image de Dieu vs l'image de l'écran</p>
-                            <p>Discussion sur la dignité humaine et l'objectification dans les contenus à haute excitation/pornographiques.</p>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-lg mb-1 lang-en">The Reward Center</h4>
+                            <h4 class="font-bold text-lg mb-1 lang-fr">Le centre de récompense</h4>
+                            <p class="text-slate-600 lang-en">Fully active in Grade 9. It craves dopamine and social validation.</p>
+                            <p class="text-slate-600 lang-fr">Pleinement actif en 9e année. Il a soif de dopamine et de validation sociale.</p>
                         </div>
-                        <p><strong>Activité :</strong> Créer un « Manifeste numérique » sur le respect de soi et des autres.</p>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- LESSON 4 -->
-        <div id="lesson4" class="tab-content space-y-6">
-            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border-l-8 border-amber-500">
-                <span class="text-amber-600 font-bold tracking-widest text-xs uppercase">Leçon 4</span>
-                <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-4">Le balayage intelligent (Achats)</h2>
-                <div class="space-y-6 text-slate-700 text-sm md:text-base">
-                    <div class="flex flex-wrap gap-4 text-xs font-semibold text-slate-500">
-                        <span>CURRICULUM: C3.1 (Littératie financière)</span>
-                        <span>AECO: Citoyen responsable</span>
-                    </div>
-                    <div class="border-t pt-4">
-                        <p class="mb-4"><strong>Amorce :</strong> Ami ou vendeur ? Analyse des influenceurs et du marketing déguisé.</p>
-                        <div class="bg-amber-50 p-5 md:p-6 rounded-xl mb-4 border border-amber-100">
-                            <p class="font-bold text-amber-800 italic">La psychologie du « Clic »</p>
-                            <p>Comment l'achat en un clic contourne le "frein" naturel du cerveau (le cortex préfrontal).</p>
+                    <div class="flex flex-col md:flex-row gap-6 items-start">
+                        <div class="bg-slate-200 text-slate-700 w-full md:w-48 h-32 rounded-xl flex items-center justify-center font-bold text-center p-4">
+                            <span class="lang-en">Prefrontal Cortex</span><span class="lang-fr">Cortex préfrontal</span>
                         </div>
-                        <p><strong>Action :</strong> La règle des 24 heures pour tout achat numérique non essentiel.</p>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-lg mb-1 lang-en">The Braking System</h4>
+                            <h4 class="font-bold text-lg mb-1 lang-fr">Le système de freinage</h4>
+                            <p class="text-slate-600 lang-en">Not fully developed until your mid-20s. Logic and impulse control are still "under construction."</p>
+                            <p class="text-slate-600 lang-fr">Pas totalement développé avant 25 ans. La logique et le contrôle des impulsions sont encore « en chantier ».</p>
+                        </div>
                     </div>
                 </div>
+
+                <div class="mt-8 p-6 bg-slate-900 text-white rounded-xl">
+                    <h4 class="font-bold mb-2 lang-en">Biological Fact</h4>
+                    <h4 class="font-bold mb-2 lang-fr">Fait biologique</h4>
+                    <p class="text-slate-300 text-sm lang-en">Smartphones are designed to target the developed reward center while bypassing the weak braking system. This isn't a lack of willpower; it's a design trap.</p>
+                    <p class="text-slate-300 text-sm lang-fr">Les smartphones sont conçus pour cibler le centre de récompense développé tout en contournant le système de freinage encore faible. Ce n'est pas un manque de volonté, c'est un piège de conception.</p>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Parents Tab -->
+        <section id="parents" class="tab-content">
+            <div class="max-w-4xl mx-auto space-y-6">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <h2 class="text-2xl font-bold mb-4 lang-en">How You Can Help at Home</h2>
+                    <h2 class="text-2xl font-bold mb-4 lang-fr">Comment aider à la maison</h2>
+                    
+                    <ul class="space-y-6">
+                        <li class="flex gap-4">
+                            <div class="text-2xl">🚗</div>
+                            <div>
+                                <h4 class="font-bold lang-en">The "Parking Lot" Strategy</h4>
+                                <h4 class="font-bold lang-fr">La stratégie du « stationnement »</h4>
+                                <p class="text-slate-600 lang-en">All phones "sleep" in a central charging station at night, not the bedroom.</p>
+                                <p class="text-slate-600 lang-fr">Tous les téléphones « dorment » dans une station de recharge centrale la nuit, pas dans la chambre.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <div class="text-2xl">⏸️</div>
+                            <div>
+                                <h4 class="font-bold lang-en">Model the "Pause"</h4>
+                                <h4 class="font-bold lang-fr">Pratiquez la « pause »</h4>
+                                <p class="text-slate-600 lang-en">Narrate your choices: "I'm feeling stressed, so I'm putting my phone away to reset."</p>
+                                <p class="text-slate-600 lang-fr">Expliquez vos choix : « Je me sens stressé, je pose mon téléphone pour décompresser. »</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <div class="text-2xl">📞</div>
+                            <div>
+                                <h4 class="font-bold lang-en">Need Support?</h4>
+                                <h4 class="font-bold lang-fr">Besoin de soutien ?</h4>
+                                <p class="text-slate-600 lang-en">Kids Help Phone: 1-800-668-6868 or text CONNECT to 686868.</p>
+                                <p class="text-slate-600 lang-fr">Jeunesse, J'écoute : 1-800-668-6868 ou texte CONNECT au 686868.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
     </main>
 
-    <script>
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
+    <footer class="py-12 px-4 text-center text-slate-500 text-sm border-t border-slate-200 mt-8">
+        <p class="lang-en">&copy; 2024 Digital Stewardship Initiative | Supporting Ontario Grade 9 Curriculum</p>
+        <p class="lang-fr">&copy; 2024 Initiative de gestion numérique | Soutien au curriculum de la 9e année de l'Ontario</p>
+    </footer>
 
-        function toggleMenu() {
-            mobileMenu.classList.toggle('open');
-            // Change icon from hamburger to X
-            if (mobileMenu.classList.contains('open')) {
-                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+    <script>
+        function setLanguage(lang) {
+            const enElems = document.querySelectorAll('.lang-en');
+            const frElems = document.querySelectorAll('.lang-fr');
+            const btnEn = document.getElementById('btn-en');
+            const btnFr = document.getElementById('btn-fr');
+
+            if (lang === 'fr') {
+                enElems.forEach(el => el.style.display = 'none');
+                frElems.forEach(el => el.style.display = 'block');
+                btnFr.classList.replace('bg-slate-200', 'bg-indigo-600');
+                btnFr.classList.replace('text-slate-700', 'text-white');
+                btnEn.classList.replace('bg-indigo-600', 'bg-slate-200');
+                btnEn.classList.replace('text-white', 'text-slate-700');
             } else {
-                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+                enElems.forEach(el => el.style.display = 'block');
+                frElems.forEach(el => el.style.display = 'none');
+                btnEn.classList.replace('bg-slate-200', 'bg-indigo-600');
+                btnEn.classList.replace('text-slate-700', 'text-white');
+                btnFr.classList.replace('bg-indigo-600', 'bg-slate-200');
+                btnFr.classList.replace('text-white', 'text-slate-700');
             }
         }
 
         function showTab(tabId) {
-            // Hide all content
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            // Show selected content
-            document.getElementById(tabId).classList.add('active');
-
-            // Reset Desktop Buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('bg-indigo-600', 'text-white');
-                btn.classList.add('hover:bg-slate-200');
-            });
-
-            // Reset Mobile Buttons
-            document.querySelectorAll('.tab-btn-mobile').forEach(btn => {
-                btn.classList.remove('bg-indigo-50', 'text-indigo-700');
-                btn.classList.add('text-slate-600', 'hover:bg-slate-50');
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
             });
             
-            // Highlight active desktop button
-            const desktopBtns = Array.from(document.querySelectorAll('.tab-btn'));
-            const activeDeskBtn = desktopBtns.find(b => b.getAttribute('onclick').includes(tabId));
-            if(activeDeskBtn) {
-                activeDeskBtn.classList.add('bg-indigo-600', 'text-white');
-                activeDeskBtn.classList.remove('hover:bg-slate-200');
-            }
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
 
-            // Highlight active mobile button
-            const mobileBtns = Array.from(document.querySelectorAll('.tab-btn-mobile'));
-            const activeMobBtn = mobileBtns.find(b => b.getAttribute('onclick').includes(tabId));
-            if(activeMobBtn) {
-                activeMobBtn.classList.add('bg-indigo-50', 'text-indigo-700');
-                activeMobBtn.classList.remove('text-slate-600', 'hover:bg-slate-50');
-            }
+            // Update button styles
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-100', 'text-indigo-800');
+                btn.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
+            });
 
-            // Close mobile menu after selection
-            if(mobileMenu.classList.contains('open')) {
-                toggleMenu();
-            }
-
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const activeBtn = document.querySelector(`[data-tab="${tabId}"]`);
+            activeBtn.classList.add('bg-indigo-100', 'text-indigo-800');
+            activeBtn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
         }
+
+        // Initialize view
+        window.onload = () => {
+            setLanguage('en');
+        };
     </script>
 </body>
 </html>
